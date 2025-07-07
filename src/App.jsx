@@ -7,6 +7,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { HomePage } from "./components/HomePage";
 import { LandingPage } from "./components/LandingPage";
 import { CircularLoader } from "./components/CircularLoader";
+import { ProfilePage } from "./components/ProfilePage";
 
 function App() {
   const { loading } = useAuth();
@@ -23,6 +24,14 @@ function App() {
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           }
         />

@@ -40,7 +40,9 @@ export const LandingPage = () => {
                     </MenuButton>
                     <Menu placement="bottom-end">
                       <MenuItem onClick={() => nav("/home")}>Home</MenuItem>
-                      <MenuItem>Profile</MenuItem>
+                      <MenuItem onClick={() => nav("/profile")}>
+                        Profile
+                      </MenuItem>
                       <MenuItem onClick={logout}>Logout</MenuItem>
                     </Menu>
                   </Dropdown>
