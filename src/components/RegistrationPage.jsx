@@ -3,14 +3,15 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react"; // Don't forget to import useEffect
 
 export const RegistrationPage = () => {
-  const { loginWithGoogle, isAuthenticated } = useAuth();
+  const { user, loginWithGoogle } = useAuth();
   const nav = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    const isUser = !!user;
+    if (isUser) {
       nav("/home");
     }
-  }, [isAuthenticated, nav]); // Add dependencies to the dependency array
+  }, [nav]);
 
   return (
     <>

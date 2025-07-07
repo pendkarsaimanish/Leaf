@@ -36,7 +36,7 @@ export const LandingPage = () => {
                         root: { color: "neutral" },
                       }}
                     >
-                      <Avatar variant="soft" src={user?.profilePic} />
+                      <Avatar variant="soft" />
                     </MenuButton>
                     <Menu placement="bottom-end">
                       <MenuItem onClick={() => nav("/home")}>Home</MenuItem>
