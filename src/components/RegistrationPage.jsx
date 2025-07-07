@@ -1,17 +1,27 @@
+import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
+
 export const RegistrationPage = () => {
+  const { loginWithGoogle, isAuthenticated } = useAuth();
+  const nav = useNavigate();
+
+  if (isAuthenticated) {
+    console.log(isAuthenticated);
+    nav("/home");
+  }
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img alt="Leaf" src="/leaf.svg" className="mx-auto h-16 w-auto" />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Sign in to your account
+            Sign in to Leaf
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" className="space-y-6">
-            {/* Email */}
+          <div className="space-y-6">
             {/* <div>
               <label
                 htmlFor="email"
@@ -31,7 +41,6 @@ export const RegistrationPage = () => {
               </div>
             </div> */}
 
-            {/* Password */}
             {/* <div>
               <div className="flex items-center justify-between">
                 <label
@@ -62,14 +71,16 @@ export const RegistrationPage = () => {
             </div> */}
 
             <div>
-              <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ">
-                <img src="/google.svg" alt="g" className="h-6 mr-2" />
+              <button
+                className="flex w-full justify-center items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 "
+                onClick={loginWithGoogle}
+              >
+                <img src="/google.svg" alt="G" className="h-5 mr-2" />
                 Login with Google
               </button>
             </div>
-          </form>
+          </div>
 
-          {/* Sign Up */}
           {/* <p className="mt-10 text-center text-sm/6 text-gray-500">
             Not a member?{" "}
             <a

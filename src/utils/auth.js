@@ -1,7 +1,46 @@
-import { account, OAuthProvider } from "./appwrite";
+import { account, OAuthProvider, session } from "./appwrite";
 
-account.createOAuth2Session(
-  OAuthProvider.Google,
-  "http://localhost:5173/home",
-  "http://localhost:5173/"
-);
+export const createGoogleOAth2Session = () => {
+  return account.createOAuth2Session(
+    OAuthProvider.Google,
+    "http://localhost:5173/home", //Login Success URL
+    "http://localhost:5173/" //Login Failed URL
+  );
+};
+
+export const getCurrentUser = async () => {
+  try {
+    return await account.get();
+  } catch (error) {
+    console.log("No user logged in", error);
+    return null;
+  }
+};
+
+export const logout = async () => {
+  try {
+    await account.deleteSession("current");
+  } catch (error) {
+    console.log("Error logging out", error);
+  }
+};
+
+export const getGoogleProfilePicture = async () => {
+  const token = session?.providerAccessToken;
+
+  try {
+    const res = await fetch(
+      "https://people.googleapis.com/v1/people/me?personFields=photos,names,emailAddresses",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const profile = await res.json();
+    const profilePicUrl = profile.photos?.[0]?.url;
+    return profilePicUrl;
+  } catch (err) {
+    console.log("Profile Pic Error", err);
+  }
+};
