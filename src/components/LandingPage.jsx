@@ -28,8 +28,8 @@ export const LandingPage = () => {
                 href={user ? "/home" : "/login"}
                 className="text-sm/6 font-semibold text-gray-900"
               >
-                {user.profilePic ? (
-                  <Avatar variant="soft" src={user.profilePic} />
+                {user ? (
+                  <Avatar variant="soft" src={user?.profilePic} />
                 ) : (
                   <>
                     Log in <span aria-hidden="true">&rarr;</span>

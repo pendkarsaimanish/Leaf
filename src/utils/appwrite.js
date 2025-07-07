@@ -8,6 +8,6 @@ const client = new Client()
 
 const account = new Account(client);
 
-const session = await account.getSession("current");
+// const session = await account.getSession("current");
 
-export { OAuthProvider, client, account, session, ID };
+export { OAuthProvider, client, account, ID };
