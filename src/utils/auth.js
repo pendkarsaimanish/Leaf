@@ -3,8 +3,8 @@ import { account, OAuthProvider } from "./appwrite";
 export const createGoogleOAth2Session = () => {
   return account.createOAuth2Session(
     OAuthProvider.Google,
-    "http://localhost:5173/home", //Login Success URL
-    "http://localhost:5173/" //Login Failed URL
+    "https://leaf-nine.vercel.app//home", //Login Success URL
+    "https://leaf-nine.vercel.app/" //Login Failed URL
   );
 };
 
