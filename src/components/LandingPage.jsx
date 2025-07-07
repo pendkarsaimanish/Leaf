@@ -1,12 +1,15 @@
 import { useAuth } from "../context/AuthContext";
-import CircularProgress from "@mui/joy/CircularProgress";
-import { CircularLoader } from "./CircularLoader";
 import Avatar from "@mui/joy/Avatar";
+import Dropdown from "@mui/joy/Dropdown";
+import IconButton from "@mui/joy/IconButton";
+import Menu from "@mui/joy/Menu";
+import MenuButton from "@mui/joy/MenuButton";
+import MenuItem from "@mui/joy/MenuItem";
+import { useNavigate } from "react-router";
 
 export const LandingPage = () => {
-  const { user } = useAuth();
-
-  user && console.log(user);
+  const { user, logout } = useAuth();
+  const nav = useNavigate();
 
   return (
     <>
@@ -24,18 +27,32 @@ export const LandingPage = () => {
             </div>
 
             <div className=" flex flex-1 justify-end">
-              <a
-                href={user ? "/home" : "/login"}
-                className="text-sm/6 font-semibold text-gray-900"
-              >
-                {user ? (
-                  <Avatar variant="soft" src={user?.profilePic} />
-                ) : (
-                  <>
-                    Log in <span aria-hidden="true">&rarr;</span>
-                  </>
-                )}
-              </a>
+              {user ? (
+                <>
+                  <Dropdown>
+                    <MenuButton
+                      slots={{ root: IconButton }}
+                      slotProps={{
+                        root: { color: "neutral" },
+                      }}
+                    >
+                      <Avatar variant="soft" src={user?.profilePic} />
+                    </MenuButton>
+                    <Menu placement="bottom-end">
+                      <MenuItem onClick={() => nav("/home")}>Home</MenuItem>
+                      <MenuItem>Profile</MenuItem>
+                      <MenuItem onClick={logout}>Logout</MenuItem>
+                    </Menu>
+                  </Dropdown>
+                </>
+              ) : (
+                <a
+                  href={"/login"}
+                  className="text-sm/6 font-semibold text-gray-900"
+                >
+                  Log in <span aria-hidden="true">&rarr;</span>
+                </a>
+              )}
             </div>
           </nav>
         </header>
@@ -93,10 +110,3 @@ export const LandingPage = () => {
     </>
   );
 };
-
-{
-  /* <div>Landing Page</div>
-<a href={!user ? "/login" : "/home"} className="text-indigo-400">
-  {!user ? "Login" : "Home"}
-</a> */
-}

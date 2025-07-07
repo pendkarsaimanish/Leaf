@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }) => {
         profilePic = await getGoogleProfilePicture();
       }
 
-      // setUser(userData);
-      setUser({ ...userData, profilePic });
+      setUser(userData);
+      // setUser({ ...userData, profilePic });
     } catch (err) {
       console.log(err);
       setUser(null);

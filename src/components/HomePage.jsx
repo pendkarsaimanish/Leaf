@@ -1,7 +1,9 @@
 import { useAuth } from "../context/AuthContext";
 
 export const HomePage = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+
+  user && console.log(user);
 
   return (
     <div>
