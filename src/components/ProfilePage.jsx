@@ -5,5 +5,10 @@ export const ProfilePage = () => {
 
   console.log(user);
 
-  return <>Profile</>;
+  return (
+    <>
+      <p>Name {user.name}</p>
+      <p>Email {user.email}</p>
+    </>
+  );
 };
