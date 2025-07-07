@@ -3,6 +3,7 @@ import {
   createGoogleOAth2Session,
   getCurrentUser,
   logout as appwriteLogout,
+  getGoogleProfilePicture,
   // getGoogleProfilePicture,
 } from "../utils/auth";
 
@@ -19,14 +20,14 @@ export const AuthProvider = ({ children }) => {
   const checkUserStatus = async () => {
     try {
       const userData = await getCurrentUser();
-      // let profilePic = null;
+      let profilePic = null;
 
-      // if (userData) {
-      //   profilePic = await getGoogleProfilePicture();
-      // }
+      if (userData) {
+        profilePic = await getGoogleProfilePicture();
+      }
 
-      setUser(userData);
-      // setUser({ ...userData, profilePic });
+      // setUser(userData);
+      setUser({ ...userData, profilePic });
     } catch (err) {
       console.log(err);
       setUser(null);

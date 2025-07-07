@@ -10,6 +10,7 @@ export const createGoogleOAth2Session = () => {
 
 export const getCurrentUser = async () => {
   try {
+    console.log(account.get());
     return await account.get();
   } catch (error) {
     console.log("No user logged in", error);
@@ -25,23 +26,26 @@ export const logout = async () => {
   }
 };
 
-// export const getGoogleProfilePicture = async () => {
-//   const session = await account.getSession("current");
-//   const token = session?.providerAccessToken;
+export const getGoogleProfilePicture = async () => {
+  const isUser = (await account.get()).status;
+  if (isUser) {
+    const session = await account.getSession("current");
+    const token = session?.providerAccessToken;
 
-//   try {
-//     const res = await fetch(
-//       "https://people.googleapis.com/v1/people/me?personFields=photos,names,emailAddresses",
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//     const profile = await res.json();
-//     const profilePicUrl = profile.photos?.[0]?.url;
-//     return profilePicUrl;
-//   } catch (err) {
-//     console.log("Profile Pic Error", err);
-//   }
-// };
+    try {
+      const res = await fetch(
+        "https://people.googleapis.com/v1/people/me?personFields=photos,names,emailAddresses",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const profile = await res.json();
+      const profilePicUrl = profile.photos?.[0]?.url;
+      return profilePicUrl;
+    } catch (err) {
+      console.log("Profile Pic Error", err);
+    }
+  }
+};
