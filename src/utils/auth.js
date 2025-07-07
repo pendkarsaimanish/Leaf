@@ -10,7 +10,6 @@ export const createGoogleOAth2Session = () => {
 
 export const getCurrentUser = async () => {
   try {
-    console.log(account.get());
     return await account.get();
   } catch (error) {
     console.log("No user logged in", error);
